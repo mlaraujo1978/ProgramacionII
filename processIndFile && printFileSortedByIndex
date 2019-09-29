@@ -1,0 +1,78 @@
+void processIndexFile(FILE *fI, FILE* fN){
+
+STR_NOTAS nota;
+STR_INDICE ind;
+
+fN=fopen( "matematica.data","rb+");
+fI=fopen( "indices.data","rb+");
+
+int cont=0;
+
+    fread(&nota, sizeof(STR_NOTAS), 1, fN);
+
+            while(!feof(fN)){
+
+                int p= searchPosition(nota.legajo, nota.nParcial);
+
+                fseek(fI, sizeof(STR_INDICE)*(p), SEEK_SET);
+
+                ind.indice=ftell(fN);
+
+                fwrite(&ind, sizeof(STR_INDICE), 1, fI);
+
+    fread(&nota, sizeof(STR_NOTAS), 1, fN);
+
+            }
+fclose(fI);
+fclose(fN);
+}
+
+// funcion que imprime//
+
+void printFileSortedByIndex(FILE *fI, char nF[16], char tA[4], FILE *fN, char nFb[16], char tAb[4]){
+
+STR_NOTAS nota;
+STR_INDICE ind;
+
+fI=fopen(nF, tA);
+fN=fopen(nFb, tAb);
+
+
+fread(&ind, sizeof(STR_INDICE), 1, fI);
+
+    while( !feof(fI)){
+
+    fseek(fN,(ind.indice),SEEK_SET);
+
+    fread(&nota, sizeof(STR_NOTAS), 1, fN);
+
+    printf("N° parcial: %d\t Nota: %.2f\t Fecha: %s\t Legajo: %d\n", nota.nParcial, nota.nota, nota.fecha, nota.legajo);
+
+    fread(&ind, sizeof(STR_INDICE), 1, fI);
+    }
+fclose(fN);
+fclose(fI);
+}
+
+//en la salida me imprime al final el legajo 1000 y el registro de la nota 1 me lo pisa con los datos de la nota2..., y no entiendo porque...//
+
+N░ parcial: 1    Nota: 5.00      Fecha: 14/06/19         Legajo: 1001
+N░ parcial: 2    Nota: 8.00      Fecha: 02/08/19         Legajo: 1001
+N░ parcial: 1    Nota: 5.00      Fecha: 14/06/19         Legajo: 1002
+N░ parcial: 2    Nota: 8.00      Fecha: 02/08/19         Legajo: 1002
+N░ parcial: 1    Nota: 5.00      Fecha: 14/06/19         Legajo: 1003
+N░ parcial: 2    Nota: 8.00      Fecha: 02/08/19         Legajo: 1003
+N░ parcial: 1    Nota: 5.00      Fecha: 14/06/19         Legajo: 1004
+N░ parcial: 2    Nota: 8.00      Fecha: 02/08/19         Legajo: 1004
+N░ parcial: 1    Nota: 5.00      Fecha: 14/06/19         Legajo: 1005
+N░ parcial: 2    Nota: 8.00      Fecha: 02/08/19         Legajo: 1005
+N░ parcial: 1    Nota: 5.00      Fecha: 14/06/19         Legajo: 1006
+N░ parcial: 2    Nota: 8.00      Fecha: 02/08/19         Legajo: 1006
+N░ parcial: 1    Nota: 5.00      Fecha: 14/06/19         Legajo: 1007
+N░ parcial: 2    Nota: 8.00      Fecha: 02/08/19         Legajo: 1007
+N░ parcial: 1    Nota: 5.00      Fecha: 14/06/19         Legajo: 1008
+N░ parcial: 2    Nota: 8.00      Fecha: 02/08/19         Legajo: 1008
+N░ parcial: 1    Nota: 5.00      Fecha: 14/06/19         Legajo: 1009
+N░ parcial: 2    Nota: 8.00      Fecha: 02/08/19         Legajo: 1009
+N░ parcial: 2    Nota: 8.00      Fecha: 02/08/19         Legajo: 1000
+N░ parcial: 2    Nota: 8.00      Fecha: 02/08/19         Legajo: 1000
