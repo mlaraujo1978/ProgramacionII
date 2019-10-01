@@ -81,16 +81,14 @@ while(*flujo &&i<1){
     i++;
     flujo++;
 }
-printf("flujo: %s\t", flujo);
 i=0;
-printf("cabe: %s\t", cabe);
 
 while(*flujo &&i<2){
     *(lmje+i)=*flujo;
     i++;
     flujo++;
 }
-printf("el largo es: %s\t", lmje);
+
 int num=atoi(lmje);
 i=0;
 
@@ -102,8 +100,6 @@ while(*flujo && i<num){
 
 suma=sumaMje(mje);
 
-printf("el mje es: %s", mje);
-printf("la suma es: %d", suma);
 i=0;
 
 while(*flujo &&i<2){
