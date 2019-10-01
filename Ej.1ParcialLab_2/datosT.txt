@@ -1,0 +1,6 @@
+Facundo,13
+Lourdes,41
+Felipe,3
+Miguel,44
+Felipe,3
+Marta,70
