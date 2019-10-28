@@ -13,6 +13,22 @@ void create (STR_NODO **head){
 *head=NULL;
 }
 
+void ingresaDatosenPila(STR_NODO **pila){
+
+int num;
+
+srand(time(NULL));
+int i=0;
+
+while(i<4){
+   num=rand()%100;
+   push(pila,num);
+    printf("\n Elemento de la Pila es :%d\t", num);
+    i++;
+}
+return;
+}
+
 void push(STR_NODO **head, int numero){    
     
     STR_NODO *nodo = (STR_NODO*)malloc(sizeof(STR_NODO));
@@ -43,43 +59,48 @@ int pop (STR_NODO **head){
      return numero;
 }
 
-int main(int argc, char** argv) {
+void insertaTercerPos(STR_NODO **pila){
+
     
-STR_NODO *head;
-create (&head);
-
-int num;
-
-srand(time(NULL));
-int i=0;
-
-while(i<4){
-   push(&head,rand()%100);
-    i++;
-}
-
 STR_NODO *pilaAux;
 create(&pilaAux);
 
-while(!isEmpty(head)){
-    num=pop(&head);
+int num;
+int i;
+
+while(!isEmpty(*pila)){
+    num=pop(pila);
     push(&pilaAux, num);
     printf("\n Elemento agregado en Pila Aux.es :%d\t", num);
 }
 
 int cont=0;
+int pos=0;
     while(!isEmpty(pilaAux)){
     cont++;
+    pos++;
     if(cont==3){
     i=28;    
-    push(&head,i);
-    printf("\n Elemento agregado en head: %d\t", i);
+    push(pila,i);
+    printf("\n Elemento agregado en  la pila es: %d\t", i);
+    printf("\n la posicion es: %d\t", pos);
     }
     else{
     num=pop(&pilaAux);
-    push(&head,num);
-    printf("\n Elemento agregado en head: %d\t", num);
+    push(pila,num);
+    printf("\n Elemento de la pila es: %d\t", num);
+    printf("\n la posicion es: %d\t", pos);
     }
 }
+}
+
+int main(int argc, char** argv) {
+    
+STR_NODO *pila;
+create (&pila);
+ingresaDatosenPila(&pila);
+
+insertaTercerPos(&pila);
+
 return (EXIT_SUCCESS);
 }
