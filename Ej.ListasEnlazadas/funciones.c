@@ -80,12 +80,13 @@ void insertOrderedA(STR_NODOA **list, int legajo){
     
     STR_NODOA *new = (STR_NODOA*)malloc(sizeof(STR_NODOA));
     new->legajo = legajo;
+    printf(" El lejajo es: %d\t", new->legajo);
     new->ste = NULL;
     
     STR_NODOA *listAux = *list;
     STR_NODOA *nodoAnt = NULL;
     
-    while(listAux != NULL && legajo< listAux->legajo){
+    while(listAux != NULL && legajo> listAux->legajo){
         nodoAnt = listAux;
         listAux = listAux->ste;
     }
@@ -110,16 +111,21 @@ void printList(STR_NODOC *listC){
     return;
 }
 
-void printListA(STR_NODOA *list){
-   
+void printListCarrerasAlum(STR_NODOC *list){
+
     while(list != NULL){
-        printf("El legajo es: %d\n", list->legajo);
-        list = list->ste;
+        printf("\n La carrera es: %s\t", list->nombreC);
+        printf(" El codigo de la carrera es: %d\t", list->codigoC);
+        while(list->alum != NULL){
+        printf("\n El legajo es: %d", list->alum->legajo);
+        list->alum=list->alum->ste ;
+    }
+        list=list->ste;
     }
     return;
 }
 
-void CargaListasconDatosFile(FILE *f, STR_NODOC **list){
+void CargaListasconDatosFile(FILE *f, STR_NODOC **list ){
 
 f=openFile("carreras.txt","r+");
     
@@ -156,8 +162,39 @@ f=openFile("carreras.txt","r+");
         }
         
         STR_NODOC *nodoAux=insertWithoutDuplicates(list,carrera);
-        insertOrderedA(nodoAux->alum, legajo);
+        
+        insertOrderedA(&(nodoAux->alum), legajo);
     }
 
     return;
 }
+
+void GeneraFileSalida(FILE *fA, FILE *f,STR_NODOC *list){
+
+    f=openFile("salida.txt", "w+");
+    fA=openFile("alumnos.data", "rb+");
+    
+    STR_ALU alu;
+    
+    while(list != NULL){
+             
+        fprintf(f,"\n La carrera es: %s\t", list->nombreC);
+        fprintf(f," Codigo de la carrera es: %d\t\n", list->codigoC);
+        
+        while(list->alum != NULL){
+        
+        fseek(fA,list->alum->legajo*(sizeof(STR_ALU)),SEEK_SET);
+        fread(&alu,sizeof(STR_ALU),1,fA);
+        fprintf(f,"\n Legajo:%d\t", list->alum->legajo);
+        fprintf(f," Legajo: %d\t Nom. y Ape.: %s\t Email.: %s\t Dir.: %s\n", alu.legajo, alu.nYa, alu.email, alu.dir);
+                
+        list->alum=list->alum->ste ;
+    }
+        list=list->ste;
+    }
+       
+    fclose(f);
+    fclose(fA);
+    return;
+}
+

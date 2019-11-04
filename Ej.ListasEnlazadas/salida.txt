@@ -1,0 +1,35 @@
+
+ La carrera es: CONTADOR
+	 Codigo de la carrera es: 1	
+
+ Legajo:2	 Legajo: 3	 Nom. y Ape.: SOL PAZ	 Email.: SOL@GMAIL.COM	 Dir.: BB
+
+ Legajo:4	 Legajo: 5	 Nom. y Ape.: VALEN RAMIREZ	 Email.: VALEN@GMAIL.COM	 Dir.: CC
+
+ La carrera es: ABOGACIA
+	 Codigo de la carrera es: 2	
+
+ Legajo:1	 Legajo: 2	 Nom. y Ape.: ANA AMOR	 Email.: ANA@GMAIL.COM	 Dir.: BB
+
+ Legajo:10	 Legajo: 2	 Nom. y Ape.: ANA AMOR	 Email.: ANA@GMAIL.COM	 Dir.: BB
+
+ La carrera es: ARQUITECTURA
+	 Codigo de la carrera es: 3	
+
+ Legajo:5	 Legajo: 6	 Nom. y Ape.: JOSE PEREZ	 Email.: JOSE@GMAIL.COM	 Dir.: AA
+
+ Legajo:6	 Legajo: 7	 Nom. y Ape.: MIGUEL VIZZI	 Email.: MIGUEL@GMAIL.COM	 Dir.: CC
+
+ Legajo:7	 Legajo: 8	 Nom. y Ape.: ROSA GARCIA	 Email.: ROSA@GMAIL.COM	 Dir.: BB
+
+ La carrera es: INGENIERIA
+	 Codigo de la carrera es: 4	
+
+ Legajo:9	 Legajo: 10	 Nom. y Ape.: MARIA ARAUJO	 Email.: MARIA@GMAIL.COM	 Dir.: BB
+
+ La carrera es: PROGRAMACION
+	 Codigo de la carrera es: 5	
+
+ Legajo:3	 Legajo: 4	 Nom. y Ape.: RAMON GIL	 Email.: RAMON@GMAIL.COM	 Dir.: AA
+
+ Legajo:8	 Legajo: 9	 Nom. y Ape.: FELIPE VIZZI	 Email.: FELIPE@GMAIL.COM	 Dir.: BB

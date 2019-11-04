@@ -4,9 +4,9 @@
 
 typedef struct{
 int legajo;
-char nYa[40+1];
-char dir[60+1];
-char email[20+1];
+char nYa[40];
+char dir[60];
+char email[20];
 }STR_ALU;
 
 typedef struct{
@@ -43,9 +43,11 @@ void insertOrderedA(STR_NODOA **list, int legajo);
  
 void printList(STR_NODOC *listC);
 
-void printListA(STR_NODOA *listA);
+void printListCarrerasAlum(STR_NODOC *listA);
    
 void CargaListasconDatosFile(FILE *f, STR_NODOC **list);
+
+void GeneraFileSalida(FILE *fA, FILE *f,STR_NODOC *list);
 
 #endif	// FUNCIONES_H
 
