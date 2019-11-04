@@ -19,9 +19,10 @@ int main(int argc, char** argv) {
     FILE *fS=NULL;
     
     STR_NODOC *listC=NULL;
-    //printListCarrerasAlum(listC);
-       
+          
     CargaListasconDatosFile(fC, &listC);
+    
+    printListCarrerasAlum(listC);
       
     GeneraFileSalida(fA, fS,listC);
    
