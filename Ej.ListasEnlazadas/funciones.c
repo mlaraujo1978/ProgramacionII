@@ -185,7 +185,7 @@ void GeneraFileSalida(FILE *fA, FILE *f,STR_NODOC *list){
         
         fseek(fA,((list->alum->legajo)-1)*(sizeof(STR_ALU)),SEEK_SET);
         fread(&alu,sizeof(STR_ALU),1,fA);
-        fprintf(f,"\n Legajo:%d\t", list->alum->legajo);
+        //fprintf(f,"\n Legajo:%d\t", list->alum->legajo);
         fprintf(f," Legajo: %d\t Nom. y Ape.: %s\t Email.: %s\t Dir.: %s\n", alu.legajo, alu.nYa, alu.email, alu.dir);
                 
         list->alum=list->alum->ste ;
