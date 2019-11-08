@@ -30,17 +30,7 @@ void add (STR_QUEUE *q, STR_CLIENTE cliente){
     
  STR_NODO *new=(STR_NODO*)malloc(sizeof(STR_NODO));
   
-    strncpy( new->cli.nomYape,cliente.nomYape, 15);
-    
-    new->cli.dni=cliente.dni;
-    
-    strncpy( new->cli.tipoC,cliente.tipoC, 2);
-    
-    strncpy( new->cli.sexo,cliente.sexo, 2);
-  
-    strncpy( new->cli.embara,cliente.embara,2);
-   
-    new->cli.tOp=cliente.tOp;   
+    new->cli=cliente;
     
     new->ste = NULL;
 
@@ -120,19 +110,15 @@ return;
 STR_CLIENTE remove1 (STR_QUEUE *q){
  
     STR_NODO *aux= q->frente;
+    
+    q->frente=aux->ste;
  
     STR_CLIENTE cliente= aux->cli;
  
-    //printf("\n DNI:%d\t",cliente.dni);
-    //printf(" Nombre y Apellido: %s\t",cliente.nomYape);
-    //printf(" Nombre y Apellido: %s\t",cliente.tipoC);
-    //printf(" Nombre y Apellido: %d\t",cliente.tOp);
-  
-    q->frente=aux->ste;
-    q->cant--;
-    aux->ste=NULL;
     free(aux);
- 
+
+    q->cant--;
+    
  if(q->frente==NULL){
      q->fin=NULL;
  }
@@ -192,9 +178,9 @@ return;
 void imprimiFileAtencion(FILE *f){
 
 f=OpenFile("archivoAtencion","r+");
-char registro[40];
+char *registro=(char*)malloc(sizeof(char)*40);
 
-while(fgets(registro,41,f)!=NULL){
+while(fgets(registro,40+1,f)!=NULL){
 
     printf("%s",registro);
 }
