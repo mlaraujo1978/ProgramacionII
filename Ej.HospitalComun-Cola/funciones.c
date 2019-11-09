@@ -47,49 +47,54 @@ void cargaPacientesCola(FILE *f, STR_Q *q){
     
     int cantIte=0;
     int i=0;
+    int j=0;
        
     while(fgets(linea,49+1,f)!=NULL){
         
         while(*linea){
-        i=0;  
-        memset(dato,'\0',49);
-          
+                  
             while(*linea && *linea!=',' && *linea !='.'){
              
             *(dato+i)= *linea;
              linea++;
              i++;
+             j++;
             }
+            i=0;
             cantIte++;    
             if(cantIte==1){
                 memset(paciente.nombre,'\0',20);
                 strncpy(paciente.nombre,dato,20);
-                printf("\nNombre: %s\t",paciente.nombre);
+                //printf("\nNombre: %s\t",paciente.nombre);
                 }
             if(cantIte==2){
                 memset(paciente.dni,'\0',15);
                 strncpy(paciente.dni,dato,15);
-                printf("DNI: %s\t",paciente.dni);
+                //printf("DNI: %s\t",paciente.dni);
             }
             if(cantIte==3){
                 memset(paciente.sexo,'\0',10);
                 strncpy(paciente.sexo,dato,10);
-                printf("sexo: %s\t",paciente.sexo);
+                //printf("sexo: %s\t",paciente.sexo);
             }
             if(cantIte==4){
                 memset(paciente.edad,'\0',4);
                 strncpy(paciente.edad,dato,4);
-                printf("Edad: %s\t",paciente.edad);
+                //printf("Edad: %s\t",paciente.edad);
             }
-           linea++;
+            memset(dato,'\0',49);
+            linea++;
+            j++;
             }
         addQ(q,paciente);
         cantIte=0;
+        linea=linea-j;
     }
     
 fclose(f);
 return;   
 }
+
 
 
 void crearCola(STR_Q *q){
