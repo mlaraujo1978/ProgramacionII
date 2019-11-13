@@ -19,8 +19,6 @@ FILE *fMovimientos=NULL;
 STR_LISTA *zonaE=NULL;
 STR_LISTA *despegue=NULL;
 
-STR_AVION avion;
-
 int opcion=0;
 
                 printf("\n.:Menu:.\n");
