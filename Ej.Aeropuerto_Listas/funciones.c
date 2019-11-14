@@ -316,8 +316,6 @@ int posDesp=0;
             insertInfront(despegue,avion);
           
         } 
-
-         *zE=*despegue;   
                  
             while(*despegue!=NULL){
                               
