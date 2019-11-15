@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
               printf("2-Genera archivo de salida.txt con los datos de carreras, lejagos y alumnos: \n");
                   printf("3-Imprime archivo de salida txt: \n");                         
                       printf("4-Imprime archivo binario con datos de alumnos:\t");
-                        printf("Ingrese una opción del 1 al 5, 0 para terminar:\t");
+                        printf("Ingrese una opción del 1 al 4, 0 para terminar:\t");
                             scanf("%d",&opcion);                          
                                       
     
@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
               printf("2-Genera archivo de salida.txt con los datos de carreras, lejagos y alumnos: \n");
                   printf("3-Imprime archivo de salida txt: \n");                         
                       printf("4-Imprime archivo binario con datos de alumnos:\t");
-                        printf("Ingrese una opción del 1 al 5, 0 para terminar:\t");
+                        printf("Ingrese una opción del 1 al 4, 0 para terminar:\t");
                             scanf("%d",&opcion);                          
                                                   
     }    
