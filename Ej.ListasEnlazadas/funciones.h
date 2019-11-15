@@ -43,11 +43,13 @@ void insertOrderedA(STR_NODOA **list, int legajo);
  
 void printList(STR_NODOC *listC);
 
-void printListCarrerasAlum(STR_NODOC *listA);
+void printListCarrerasAlum(STR_NODOC *list);
    
 void CargaListasconDatosFile(FILE *f, STR_NODOC **list);
 
 void GeneraFileSalida(FILE *fA, FILE *f,STR_NODOC *list);
+
+void ImprimeFileS (FILE * f, char nF[10], char oT[4]);
 
 #endif	// FUNCIONES_H
 

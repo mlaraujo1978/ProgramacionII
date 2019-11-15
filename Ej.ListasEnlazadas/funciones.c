@@ -4,9 +4,9 @@
 #include <string.h>
 #include "funciones.h"
 
-FILE * openFile(char nF[15], char oT[4]){
+FILE * openFile(char nameF[10], char openT[4]){
 
-    FILE* f=fopen(nF, oT);
+    FILE* f=fopen(nameF, openT);
     if(f==NULL){
         printf("El archivo no se pudo abrir");
         exit(1);    
@@ -14,19 +14,31 @@ FILE * openFile(char nF[15], char oT[4]){
     return f;
 }
 
-void ImprimeFile (FILE * f, char nF[10], char oT[4]){
+void ImprimeFile (FILE * f, char nameF[10], char openT[4]){
 
 STR_ALU alu;
 
-f= openFile(nF, oT);  
+f= openFile(nameF, openT);  
 
 fread(&alu, sizeof(STR_ALU), 1, f);
      
     while(!feof(f)){
-    printf(" Legajo: %d\t Nombre y apellido: %s\t Dir.: %s\t Email: %s \n", alu.legajo, alu.nYa, alu.dir, alu.email);
+    printf("Legajo: %d\t Nombre y apellido: %s\t Dir.: %s\t Email: %s \n", alu.legajo, alu.nYa, alu.dir, alu.email);
     
     fread(&alu, sizeof(STR_ALU), 1, f);
 }
+fclose(f);  
+ }
+
+void ImprimeFileS (FILE * f, char nameF[10], char openT[4]){
+
+f= openFile(nameF, openT);  
+
+char *datos=(char*)malloc(sizeof(char)*122);
+     
+    while((fgets(datos,122+1,f))!=NULL ){
+    printf("%s", datos);
+   }
 fclose(f);  
  }
 
@@ -80,8 +92,7 @@ void insertOrderedA(STR_NODOA **list, int legajo){
     
     STR_NODOA *new = (STR_NODOA*)malloc(sizeof(STR_NODOA));
     new->legajo = legajo;
-    printf(" El lejajo es: %d\t", new->legajo);
-    new->ste = NULL;
+        new->ste = NULL;
     
     STR_NODOA *listAux = *list;
     STR_NODOA *nodoAnt = NULL;
@@ -104,8 +115,8 @@ void insertOrderedA(STR_NODOA **list, int legajo){
 void printList(STR_NODOC *listC){
    
     while(listC != NULL){
-        printf("\n El codigo de la mat. es: %d\n", listC->codigoC);
-        printf(" El nombre de la materia es: %s\n", listC->nombreC);
+        printf("\n El codigo de la carrera. es: %d\n", listC->codigoC);
+        printf(" El nombre de la carrera es: %s\n", listC->nombreC);
         listC = listC->ste;
     }
     return;
@@ -113,14 +124,21 @@ void printList(STR_NODOC *listC){
 
 void printListCarrerasAlum(STR_NODOC *list){
 
-    while(list != NULL){
-        printf("\n La carrera es: %s\t", list->nombreC);
-        printf(" El codigo de la carrera es: %d\t", list->codigoC);
-        while(list->alum != NULL){
-        printf("\n El legajo es: %d", list->alum->legajo);
-        list->alum=list->alum->ste ;
-    }
-        list=list->ste;
+STR_NODOC *listAux=list;    
+    
+    while(listAux != NULL){
+        
+        printf("\nLa carrera es: %s\t", listAux->nombreC);
+        printf("El codigo de la carrera es: %d\t", listAux->codigoC);
+        
+        while(listAux->alum != NULL){
+        
+            printf("\nEl legajo es: %d", listAux->alum->legajo);
+            
+            listAux->alum=listAux->alum->ste ;
+        }
+        
+        listAux=listAux->ste;
     }
     return;
 }
@@ -129,8 +147,8 @@ void CargaListasconDatosFile(FILE *f, STR_NODOC **list ){
 
 f=openFile("carreras.txt","r+");
     
-    char registro[47+1];
-    char *token=(char*)malloc(sizeof(char)*40+1);
+    char *registro=(char*)malloc(sizeof(char)*47);
+    char *token=NULL;
     
     STR_CARRERA carrera;
     
@@ -177,24 +195,26 @@ void GeneraFileSalida(FILE *fA, FILE *f,STR_NODOC *list){
     STR_ALU alu;
     
     while(list != NULL){
-             
-        fprintf(f,"\n La carrera es: %s\t", list->nombreC);
-        fprintf(f," Codigo de la carrera es: %d\t\n", list->codigoC);
         
-        while(list->alum != NULL){
+        //printf("\nLa carrera es:%s", list->nombreC);
+        fprintf(f,"\nCodigo de la carrera es: %d\t", list->codigoC);
         
-        fseek(fA,((list->alum->legajo)-1)*(sizeof(STR_ALU)),SEEK_SET);
-        fread(&alu,sizeof(STR_ALU),1,fA);
-        //fprintf(f,"\n Legajo:%d\t", list->alum->legajo);
-        fprintf(f," Legajo: %d\t Nom. y Ape.: %s\t Email.: %s\t Dir.: %s\n", alu.legajo, alu.nYa, alu.email, alu.dir);
+            while(list->alum != NULL){
+        
+            //printf("\n Legajo-Lista:%d\t", list->alum->legajo);
+             fseek(fA,((list->alum->legajo)-1)*(sizeof(STR_ALU)),SEEK_SET);
+                fread(&alu,sizeof(STR_ALU),1,fA);
+                    fprintf(f,"\nLegajo:%d\t Nom. y Ape.:%s\t Email.:%s\t Dir.:%s\n", alu.legajo, alu.nYa, alu.email, alu.dir);
                 
-        list->alum=list->alum->ste ;
-    }
-        list=list->ste;
+            list->alum=list->alum->ste ;
+            }
+        
+    list=list->ste;
     }
        
     fclose(f);
     fclose(fA);
+    
     return;
 }
 
