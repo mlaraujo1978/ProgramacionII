@@ -20,8 +20,6 @@ STR_LISTA *creaNodo(STR_LISTA **list,STR_NOTAS nota){
     
     nodoL->legajo=nota.legajo;
     
-    memset(nodoL->aprob,'\0',2);
-    
     if(strcmp(nota.parcial,"1")==0){
     nodoL->notaPP=nota.nota;
     }
@@ -130,22 +128,6 @@ void ProcesaFileNotas(FILE *fNotas,STR_LISTA **list){
     return;
 }
 
-void revisaNotas(STR_LISTA **list){
-
-STR_LISTA *listAux=*list;
-    
-    
-            while(listAux!=NULL){
-                
-                
-                if((listAux->notaPP>=6&&listAux->notaSP>=6)||(listAux->notaPP>=6&&listAux->notaRP>=6)||(listAux->notaSP>=6&&listAux->notaRP>=6)){
-                strcpy(listAux->aprob,"A");                
-                }                
-                listAux=listAux->ste;
-            }
-return;
-}
-
 void insertAtEnd(STR_LISTA **asistencias,int legajoAct,int cantAsis){
 
     STR_LISTA *nodoL=(STR_LISTA*)malloc(sizeof(STR_LISTA));
@@ -217,7 +199,7 @@ void GeneraFileAprobados(FILE *fAprobados,STR_LISTA *notas,STR_LISTA *asistencia
     
             while(listAux!=NULL && listAux1!=NULL){
                 
-                 if(strcmp(listAux->aprob,"A")==0){
+                 if((listAux->notaPP>=6&&listAux->notaSP>=6)||(listAux->notaPP>=6&&listAux->notaRP>=6)||(listAux->notaSP>=6&&listAux->notaRP>=6)){
                                 
                       aprob.legajo=listAux->legajo;
                     
@@ -254,4 +236,5 @@ f= openFile("Aprobaron.data", "rb+");
 fclose(f);  
 
 }
+
 
