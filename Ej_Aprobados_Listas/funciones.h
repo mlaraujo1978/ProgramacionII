@@ -24,8 +24,8 @@ typedef struct nodoL{
  int notaPP;
  int notaSP;
  int notaRP;
- char aprob[2];
  int cantAsist;
+ int cantClases;
  struct nodoL *ste;
 }STR_LISTA; 
 
@@ -40,8 +40,7 @@ STR_LISTA *search(STR_LISTA *list, int legajo);
 STR_LISTA *insertOrdenado(STR_LISTA **list, STR_NOTAS nota);
 void insertSinDuplicados(STR_LISTA **list, STR_NOTAS nota);
 void ProcesaFileNotas(FILE *fNotas,STR_LISTA **lista);
-void revisaNotas(STR_LISTA **list);
-void insertAtEnd(STR_LISTA **asistencias,int legajoAct,int cantAsis);
+void insertAtEnd(STR_LISTA **asistencias,int legajoAct,int cantAsis, int cantClases);
 void ProcesaFileAsistencias(FILE *fAsistencias,STR_LISTA **asistencias);
 void GeneraFileAprobados(FILE *fAprobados,STR_LISTA *notas,STR_LISTA *asistencias);
 void ImprimeFile (FILE * f);

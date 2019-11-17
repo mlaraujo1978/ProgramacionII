@@ -22,11 +22,10 @@ int main(int argc, char** argv) {
 
                 printf("\n.:Menu:.\n");
                  printf("1-Procesa File Notas: \n");
-                  printf("2-ProcesaNotas: \n");
-                   printf("3-Procesa File Asistencias: \n");
-                    printf("4-Genera File Aprobados: \n");
-                     printf("5-Imprime File Aprobados: \n");
-                      printf("Ingrese una opción del 1 al 5, 0 para terminar:\t");
+                   printf("2-Procesa File Asistencias: \n");
+                    printf("3-Genera File Aprobados: \n");
+                     printf("4-Imprime File Aprobados: \n");
+                      printf("Ingrese una opción del 1 al 4, 0 para terminar:\t");
                         scanf("%d",&opcion);                           
                            
 
@@ -37,28 +36,24 @@ int main(int argc, char** argv) {
                         ProcesaFileNotas(fNotas,&notas);   
                         break;
                     case 2:
-                        revisaNotas(&notas);
-                        break;
-                    case 3:
                         ProcesaFileAsistencias(fAsistencias,&asistencias);
                         break;
-                    case 4:
+                    case 3:
                         GeneraFileAprobados(fAprobados,notas,asistencias);
                         break;   
-                    case 5:
+                    case 4:
                         ImprimeFile(fAprobados);        
                     default:
                         printf(".: Opcion erronea.:\n");    
                         break;
             }
-                printf("\n.:Menu:.\n");
+                 printf("\n.:Menu:.\n");
                  printf("1-Procesa File Notas: \n");
-                  printf("2-ProcesaNotas: \n");
-                   printf("3-Procesa File Asistencias: \n");
-                    printf("4-Genera File Aprobados: \n");
-                     printf("5-Imprime File Aprobados: \n");
-                      printf("Ingrese una opción del 1 al 5, 0 para terminar:\t");
-                        scanf("%d",&opcion);  
+                   printf("2-Procesa File Asistencias: \n");
+                    printf("3-Genera File Aprobados: \n");
+                     printf("4-Imprime File Aprobados: \n");
+                      printf("Ingrese una opción del 1 al 4, 0 para terminar:\t");
+                        scanf("%d",&opcion);   
         }
                         
   return (EXIT_SUCCESS);
