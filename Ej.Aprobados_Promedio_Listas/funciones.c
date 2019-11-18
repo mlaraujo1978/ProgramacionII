@@ -22,8 +22,6 @@ STR_LISTA *creaNodo(STR_LISTA **list,STR_NOTAS nota){
     
     nodoL->sumaNotas=nota.nota;
     
-    nodoL->cantNotas=1;
-
     nodoL->ste=NULL;
    
     return nodoL;
@@ -83,9 +81,8 @@ void insertSinDuplicados(STR_LISTA **list, STR_NOTAS nota){
     else{
     
         nodoL->sumaNotas+=nota.nota;
-        nodoL->cantNotas++;
-         
-        }
+                
+    }
     
     return;
 
@@ -93,7 +90,7 @@ void insertSinDuplicados(STR_LISTA **list, STR_NOTAS nota){
 
 void ProcesaFileNotas(FILE *fNotas,STR_LISTA **list){
 
-    fNotas=openFile("NotasParciales.data","rb+");
+    fNotas=openFile("NotasAprobados.data","rb+");
     
     STR_NOTAS nota;
     
@@ -103,7 +100,7 @@ void ProcesaFileNotas(FILE *fNotas,STR_LISTA **list){
             
                 insertSinDuplicados(list,nota);            
             
-            fread(&nota,sizeof(STR_NOTAS),1,fNotas);
+                fread(&nota,sizeof(STR_NOTAS),1,fNotas);
             }
     return;
 }
@@ -116,6 +113,10 @@ void insertAtEnd(STR_LISTA **asistencias,int legajoAct,int cantAsis, int cantCla
     nodoL->cantAsist=cantAsis;
     nodoL->cantClases=cantClases;
     nodoL->ste=NULL;
+    
+    printf("\nLEGAJO:%d\t",nodoL->legajo);
+    printf("Q_ASISTENCIA:%d\t",nodoL->cantAsist);
+    printf("CANT_CLASES:%d\t",nodoL->cantClases);
     
     STR_LISTA *listAux=*asistencias;
     
@@ -157,15 +158,14 @@ void ProcesaFileAsistencias(FILE *fAsistencias,STR_LISTA **asistencias){
                                 cantAsis+=asis.presente; 
                                 
                                 cantClases++;
-                                
-                                printf("La cantidad de asistencia es:%d\n",asis.presente);
-                                
-            
+                                                                         
                                 fread(&asis,sizeof(STR_ASIST),1,fAsistencias);
                             }
-                    
+                            //printf("\nLEGAJO:%d\t",legajoAct);
+                            //printf("Q_ASISTENCIA:%d\t",cantAsis);
+                            //printf("CANT_CLASES:%d\t",cantClases);
                             insertAtEnd(asistencias,legajoAct,cantAsis,cantClases);
-                            printf("La cantidad de clases es:%d\n",cantClases);
+                            
                 }
     
     fclose(fAsistencias);
@@ -174,30 +174,29 @@ void ProcesaFileAsistencias(FILE *fAsistencias,STR_LISTA **asistencias){
 
 
 void GeneraFileAprobados(FILE *fAprobados,STR_LISTA *notas,STR_LISTA *asistencias){
-    
-    
-    fAprobados= openFile("Aprobaron.data", "wb+");
+        
+    fAprobados= openFile("Aprobados.data", "wb+");
     
     STR_APROB aprob;
     
     STR_LISTA *listAux=notas;
-    STR_LISTA *listAux1=asistencias;
-    
-            while(listAux!=NULL && listAux1!=NULL){
+        
+            while(listAux!=NULL){
                 
-                 if((listAux->sumaNotas/listAux->cantNotas)>=6){
+                STR_LISTA *nodoL=search(asistencias,listAux->legajo);
+                            
+                    if( (nodoL->cantAsist/nodoL->cantClases)>=0.8 ){
                                 
                       aprob.legajo=listAux->legajo;
                       
-                      aprob.promedio=(listAux->sumaNotas/listAux->cantNotas);
+                      aprob.promedio=listAux->sumaNotas/2;
                     
-                      aprob.cantAsis=listAux1->cantAsist;
+                      aprob.cantAsis=nodoL->cantAsist;
                       
                       fwrite(&aprob,sizeof(STR_APROB),1,fAprobados);                  
                        
                  }
                  listAux=listAux->ste;
-                 listAux1=listAux1->ste;
             }
     
     fclose(fAprobados);
@@ -208,7 +207,7 @@ void ImprimeFile (FILE * f){
 
 STR_APROB aprob; 
 
-f= openFile("Aprobaron.data", "rb+");  
+f= openFile("Aprobados.data", "rb+");  
 
 
         fread(&aprob, sizeof(STR_APROB), 1, f);   
@@ -224,5 +223,48 @@ f= openFile("Aprobaron.data", "rb+");
 fclose(f);  
 
 }
+
+
+void ImprimeFileNotas (FILE *fNotas){
+
+    fNotas=openFile("NotasAprobados.data","rb+");
+    
+    STR_NOTAS nota;
+    
+    fread(&nota,sizeof(STR_NOTAS),1,fNotas);
+    
+            while(!feof(fNotas)){
+            
+               printf("LEGAJO: %d\t NOTAS: %d\n", nota.legajo, nota.nota);          
+            
+               fread(&nota,sizeof(STR_NOTAS),1,fNotas);
+            }
+    return;
+}
+
+
+void ImprimeFileAsistencias(FILE *fAsistencias){
+    
+   fAsistencias= openFile("Asistencias.data", "rb+"); 
+   
+   STR_ASIST asis;
+      
+    fread(&asis,sizeof(STR_ASIST),1,fAsistencias);
+    
+                while(!feof(fAsistencias)){
+                              
+                printf("LEGAJO: %d\t CANTIDAD ASISTENCIAS: %d\n", asis.legajo, asis.presente);
+                                           
+                fread(&asis,sizeof(STR_ASIST),1,fAsistencias);
+                            }
+                    
+    return;
+}
+
+
+
+
+
+
 
 

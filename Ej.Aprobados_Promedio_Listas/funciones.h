@@ -4,7 +4,6 @@
 
 typedef struct{
 int legajo;
-char parcial[2];
 int nota;
 }STR_NOTAS;
 
@@ -17,7 +16,6 @@ int presente;
 typedef struct nodoL{
  int legajo;
  int sumaNotas;
- int cantNotas;
  int cantAsist;
  int cantClases;
  struct nodoL *ste;
@@ -39,6 +37,8 @@ void insertAtEnd(STR_LISTA **asistencias,int legajoAct,int cantAsis, int cantCla
 void ProcesaFileAsistencias(FILE *fAsistencias,STR_LISTA **asistencias);
 void GeneraFileAprobados(FILE *fAprobados,STR_LISTA *notas,STR_LISTA *asistencias);
 void ImprimeFile (FILE * f);
+void ImprimeFileNotas(FILE *fNotas);
+void ImprimeFileAsistencias(FILE *fAsistencias);
 
 #endif /* FUNCIONES_H */
 
