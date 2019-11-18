@@ -168,20 +168,20 @@ int sumaNumerosDeListas(STR_LISTA *list1, STR_LISTA *list2 ){
         STR_LISTA *nodoL2=readAt(list2,i);
         
                 
-        if(nodoL1!=NULL && nodoL2!=NULL){
+         if(nodoL1!=NULL && nodoL2!=NULL){
         
-            suma+= nodoL1->num * pow(10,(i+maxPos)) + nodoL2->num * pow(10,(i+maxPos));
-        }
+            suma+= nodoL1->num * pow(10,(maxPos-1)) + nodoL2->num * pow(10,(maxPos-1));
+         }
         
          if(nodoL1!=NULL){
         
-            suma+=nodoL1->num * pow(10,(i+maxPos));
-        }
+            suma+=nodoL1->num * pow(10,(maxPos-1));
+         }
         
          if(nodoL2!=NULL){
         
-            suma+=nodoL2->num * pow(10,(i+maxPos));
-        }
+            suma+=nodoL2->num * pow(10,(maxPos-1));
+         }
         
         
     }
@@ -234,10 +234,9 @@ void creaListaConSuma(int suma,STR_LISTA *list1, STR_LISTA *list2,STR_LISTA **li
                 
                 }
             }
-    }
+  }
 
- maxPos=MaxPosNodo(*list3);   
-    
+ 
 return;
 }
     
