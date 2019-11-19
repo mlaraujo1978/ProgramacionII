@@ -168,8 +168,8 @@ void creaListaConSuma(int suma,STR_LISTA *list1, STR_LISTA *list2,STR_LISTA **li
                         }
                 
                     }
-                }
-        }
+               }
+          }
 
  
 return;
