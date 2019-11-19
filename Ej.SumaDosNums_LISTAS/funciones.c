@@ -4,7 +4,7 @@
 #include <math.h>
 #include "funciones.h"
 
-STR_LISTA *creaNodo(STR_LISTA **list, int dato){
+STR_LISTA *creaNodo(STR_LISTA **list, double dato){
 
     STR_LISTA *nodoL=(STR_LISTA*)malloc(sizeof(STR_LISTA));
     nodoL->num=dato;
@@ -17,11 +17,11 @@ STR_LISTA *creaNodo(STR_LISTA **list, int dato){
 int MaxPosNodo (STR_LISTA *list){
 
     STR_LISTA *listAux=list;
-    int i=1;
+    double i=1;
     
     while(listAux!=NULL){
     
-    printf("El numero es: %d", listAux->num); 
+    //printf("El numero es: %fd", listAux->num); 
     listAux=listAux->ste;
         
     i++;
@@ -31,7 +31,7 @@ int MaxPosNodo (STR_LISTA *list){
 return i;
 }
 
-void insertAtEnd (STR_LISTA **list, int dato){
+void insertAtEnd (STR_LISTA **list, double dato){
 
     STR_LISTA *nodoL=creaNodo(list,dato);
     
@@ -54,11 +54,11 @@ void insertAtEnd (STR_LISTA **list, int dato){
 return;
 }
 
-STR_LISTA *readAt(STR_LISTA *list, int pos){
+STR_LISTA *readAt(STR_LISTA *list, double pos){
 
     STR_LISTA *listAux=list;
     STR_LISTA *nodoL=NULL;
-    int i=0;
+    double i=0;
     
     while(i<pos && listAux!=NULL){
         nodoL=listAux;
@@ -74,12 +74,12 @@ STR_LISTA *readAt(STR_LISTA *list, int pos){
 return nodoL;
 }
 
-void cargaLista(STR_LISTA **list, int n, int numList[n]){
+void cargaLista(STR_LISTA **list, int n, double numList[n]){
 
     int dato;
-    int maxPosNodo=0;
+    double maxPosNodo=0;
 
-    for (int i=0; i<n;i++){
+    for (double i=0; i<n;i++){
     
         printf("Ingrese el numero:\n");
         scanf("%d", &dato);
@@ -90,15 +90,15 @@ void cargaLista(STR_LISTA **list, int n, int numList[n]){
     return;
 }
    
-int sumaNumerosDeListas(STR_LISTA *list1, STR_LISTA *list2 ){
+double sumaNumerosDeListas(STR_LISTA *list1, STR_LISTA *list2 ){
 
-    int maxPos=0;
-    int maxPosL1=MaxPosNodo(list1);
-    int maxPosL2=MaxPosNodo(list2);
-    int suma=0;
+    double maxPos=0;
+    double maxPosL1=MaxPosNodo(list1);
+    double maxPosL2=MaxPosNodo(list2);
+    double suma=0;
     double base=10;
   
-    for(int i=1;i<=maxPosL1;i++){
+    for(double i=1;i<=maxPosL1;i++){
         
         STR_LISTA *nodoL1=readAt(list1,i);
         
@@ -108,7 +108,7 @@ int sumaNumerosDeListas(STR_LISTA *list1, STR_LISTA *list2 ){
         
     }
                      
-        for(int i=1;i<=maxPosL2;i++){
+        for(double i=1;i<=maxPosL2;i++){
         
         STR_LISTA *nodoL2=readAt(list2,i);
         
@@ -118,20 +118,20 @@ int sumaNumerosDeListas(STR_LISTA *list1, STR_LISTA *list2 ){
         
        }
     
-    printf("La suma suma es:%d", suma);   
+    //printf("La suma suma es:%d", suma);   
     
 return suma;   
 
 }
 
-void creaListaConSuma(int suma,STR_LISTA *list1, STR_LISTA *list2,STR_LISTA **list3){
+void creaListaConSuma(double suma,STR_LISTA *list1, STR_LISTA *list2,STR_LISTA **list3){
 
-    int cociente;
-    int resto;
-    int base=10;
-    int maxPos;
-    int maxPosL1=MaxPosNodo(list1);
-    int maxPosL2=MaxPosNodo(list2);
+    double cociente;
+    double resto;
+    double base=10;
+    double maxPos;
+    double maxPosL1=MaxPosNodo(list1);
+    double maxPosL2=MaxPosNodo(list2);
    
           
     if(maxPosL1>maxPos){
@@ -141,9 +141,9 @@ void creaListaConSuma(int suma,STR_LISTA *list1, STR_LISTA *list2,STR_LISTA **li
         maxPos=maxPosL2;
         }
 
-            for(int i=1;i<=maxPos;i++){
+            for(double i=1;i<=maxPos;i++){
                 
-                int potencia=maxPos-i;
+                double potencia=maxPos-i;
         
                 if(i==1){
         
@@ -168,8 +168,8 @@ void creaListaConSuma(int suma,STR_LISTA *list1, STR_LISTA *list2,STR_LISTA **li
                         }
                 
                     }
-               }
-          }
+                }
+            }
 
  
 return;

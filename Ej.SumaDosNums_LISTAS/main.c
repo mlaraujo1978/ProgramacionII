@@ -25,10 +25,10 @@ int main(int argc, char** argv) {
     printf("Ingrese la cantidad de elementos lista 2:\n");
     scanf("%d", &n2);
  
-    int numLA[n1];
-    int numLB[n2];
+    double numLA[n1];
+    double numLB[n2];
     
-    int suma=0;
+    double suma=0;
      
     cargaLista(&list1,n1, numLA);
     
