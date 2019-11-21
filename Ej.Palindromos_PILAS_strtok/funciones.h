@@ -16,9 +16,11 @@ char pop(STR_PILA **p);
 
 bool isEmpty(STR_PILA *p);
 
+void cargaPilasConPalabra(STR_PILA **pal,STR_PILA **palInv, const char *token);
+
 void procesaFilePalabras(FILE *fP, FILE *fNP, STR_PILA **pal,STR_PILA **palInv);
 
-bool validaNoPalindromo(STR_PILA **pal,STR_PILA **palInv );
+bool validaPalindromo(STR_PILA **pal,STR_PILA **palInv );
 
 void imprimeFileNoPalindormos(FILE *fNP);
 

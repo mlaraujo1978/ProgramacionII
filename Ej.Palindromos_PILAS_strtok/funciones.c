@@ -16,7 +16,7 @@ FILE * openFile(const char *nameF, const char *openT){
     return f;
 }
 
-bool validaNoPalindromo(STR_PILA **pal,STR_PILA **palInv ){
+bool validaPalindromo(STR_PILA **pal,STR_PILA **palInv ){
     
     STR_PILA *pAux=NULL;
     
@@ -58,6 +58,25 @@ bool validaNoPalindromo(STR_PILA **pal,STR_PILA **palInv ){
 
   }
 
+void cargaPilasConPalabra(STR_PILA **pal,STR_PILA **palInv, const char *token){
+
+    char *palab=(char*) malloc(sizeof(char)*20);
+    memset(palab,'\0',20);
+    int i=0;
+    
+                while(*token){
+                
+                *(palab+i)=*token;
+                push(pal,*token);
+                push(palInv,*token);
+                token++;
+                i++;
+                }
+                
+                
+ return;                   
+}
+
 void procesaFilePalabras(FILE *fP, FILE *fNP, STR_PILA **pal,STR_PILA **palInv){
               
     fP= openFile("Palabras.txt", "r+");
@@ -75,26 +94,18 @@ void procesaFilePalabras(FILE *fP, FILE *fNP, STR_PILA **pal,STR_PILA **palInv){
             
     while(fgets(linea,20+1,fP)!=NULL){
         
-                token=strtok(linea,".");
+            token=strtok(linea,"\n");
                 
-                while(*token){
-                
-                *(palab+i)=*token;
-                push(pal,*token);
-                push(palInv,*token);
-                token++;
-                i++;
-                
-                }
-               
-                    if(validaNoPalindromo(pal,palInv)){
-                    //printf("La palabra no palindromo es %s",palab);
-                    fprintf(fNP, "%s\n", palab);
+            palab=token;
+            
+            cargaPilasConPalabra(pal,palInv,token);    
+             
+            if(validaPalindromo(pal,palInv)){
+            
+            fprintf(fNP, "%s\n", palab);
                                
-                    }
-          memset(palab,'\0',20);
-          i=0;
-                     
+            }
+         
     }
  
     fclose(fP);
