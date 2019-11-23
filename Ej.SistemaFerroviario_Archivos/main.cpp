@@ -23,9 +23,7 @@ int main() {
 
     actualizaGranPlanilla(fGranPlanilla, fSuben1, fSuben2, fSuben3, fSuben4);
      
-    //ImprimeFile(fGranPlanilla);     
-
-return 0;
+    return 0;
 }
 
 

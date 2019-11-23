@@ -29,7 +29,7 @@ FILE * openFile(const char *nameF, const char *openT);
 
 void ImprimeFile(FILE * f);
     
-void actualizaPlanillaSuben(FILE *fPlanilla,FILE *fSuben,const char *nameF, const char *openT);
+void actualizaPlanillaSuben(FILE *fPlanilla,FILE *fSuben,const char *nameF, const char *openT, const char *estacion);
     
 int numeroEstacionDescenso (const char *numEst);
 

@@ -42,7 +42,7 @@ fclose(f);
 return;
  }
 
-void actualizaPlanillaSuben(FILE *fPlanilla,FILE *fSuben,const char *nameF, const char *openT){
+void actualizaPlanillaSuben(FILE *fPlanilla,FILE *fSuben,const char *nameF, const char *openT, const char *estacion){
     
     fPlanilla=openFile("pasajeros.dat", "rb+");  
     fSuben=openFile(nameF, openT);
@@ -68,6 +68,8 @@ void actualizaPlanillaSuben(FILE *fPlanilla,FILE *fSuben,const char *nameF, cons
             strcpy(pasaje.estacionDesc,token);
             
             strcpy(pasaje.estadoPas,"sube");
+            
+             strcpy(pasaje.estacionAsc,estacion);
             
             fseek(fPlanilla,sizeof(STR_PASAJE)*(codPas-1),SEEK_SET);
             fwrite(&pasaje,sizeof(STR_PASAJE), 1, fPlanilla);
@@ -119,7 +121,7 @@ int numEDesc;
             while(!feof(fPlanilla)){
                 
                 numEDesc=numeroEstacionDescenso(pasaje.estacionDesc);
-                
+               
                           
                 if(strcmp(pasaje.estadoPas,"sube")==0){
                     
@@ -174,22 +176,22 @@ void actualizaGranPlanilla(FILE *fPlanilla, FILE *fSuben1,FILE *fSuben2,FILE *fS
         
             if(estacion==1){
             
-            actualizaPlanillaSuben(fPlanilla, fSuben1, "SubenE1.txt", "r+");
+            actualizaPlanillaSuben(fPlanilla, fSuben1, "SubenE1.txt", "r+", "E1");
             }
         
             if(estacion==2){
             
-            actualizaPlanillaSuben(fPlanilla, fSuben2, "SubenE2.txt", "r+");
+            actualizaPlanillaSuben(fPlanilla, fSuben2, "SubenE2.txt", "r+", "E2");
             }
         
             if(estacion==3){
             
-            actualizaPlanillaSuben(fPlanilla, fSuben3, "SubenE3.txt", "r+");
+            actualizaPlanillaSuben(fPlanilla, fSuben3, "SubenE3.txt", "r+", "E3");
             }
         
             if(estacion==4){
             
-            actualizaPlanillaSuben(fPlanilla, fSuben4,"SubenE4.txt", "r+");
+            actualizaPlanillaSuben(fPlanilla, fSuben4,"SubenE4.txt", "r+", "E4");
             }
         
         printf("\n::::::::::::::::::::::ACTUALIZA ESTADO PASAJEROS::::::::::::::::::::::");
