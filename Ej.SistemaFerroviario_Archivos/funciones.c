@@ -60,22 +60,30 @@ void actualizaPlanillaSuben(FILE *fPlanilla,FILE *fSuben,const char *nameF, cons
 
             token=strtok(linea,",");
             codPas=atoi(token);
-                                 
-            fseek(fPlanilla,sizeof(STR_PASAJE)*(codPas-1),SEEK_SET);
+            
+            
+            fseek(fPlanilla,sizeof(STR_PASAJE)*0,SEEK_SET);                    
             fread(&pasaje,sizeof(STR_PASAJE),1,fPlanilla);
             
-            token=strtok(NULL,".");
-            strcpy(pasaje.estacionDesc,token);
+                while(!feof(fPlanilla)){
+                    
+                    if(pasaje.codigoPas==codPas){ 
+                        
+                        strcpy(pasaje.estacionAsc,estacion);
+                                   
+                        token=strtok(NULL,".");
+                        strcpy(pasaje.estacionDesc,token);
             
-            strcpy(pasaje.estadoPas,"sube");
-            
-             strcpy(pasaje.estacionAsc,estacion);
-            
-            fseek(fPlanilla,sizeof(STR_PASAJE)*(codPas-1),SEEK_SET);
-            fwrite(&pasaje,sizeof(STR_PASAJE), 1, fPlanilla);
-              
-    }
-
+                        strcpy(pasaje.estadoPas,"sube");
+                                                
+                        fseek(fPlanilla,sizeof(STR_PASAJE)*(-1),SEEK_CUR);
+                        fwrite(&pasaje,sizeof(STR_PASAJE), 1, fPlanilla);
+                    }        
+                
+                    fread(&pasaje,sizeof(STR_PASAJE),1,fPlanilla);
+                }
+        }
+    
     fclose(fPlanilla);  
     fclose(fSuben);  
 
