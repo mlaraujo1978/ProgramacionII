@@ -15,10 +15,12 @@ void reseteaNumero(char *numero,int largo){
 
     for(int i=0;i<largo+1;i++){
     
-    *(numero+i)='\0';    
+        *(numero+i)='\0';    
     }
-    return;
+    
+return;
 }
+
 int largoNumero(char *numero){
 
     int largo=0;
@@ -28,7 +30,8 @@ int largoNumero(char *numero){
         numero++;
         largo++;   
     }
-    return largo;
+
+return largo;
 
 }
 
@@ -45,32 +48,37 @@ char * formateaNumero(char *numero){
     
     int i=0;
     
-    while(*numero){
+        while(*numero){
     
-    *(numeroS+i)=*numero;
-    numero++;
-    i++;
+            *(numeroS+i)=*numero;
+            numero++;
+            i++;
       
             if((largo==4 || largo==7)&& i==1){
                  *(numeroS+i)='.';
                 i++;
             }
+            
             if((largo==5 || largo==8) && i==2){
                 *(numeroS+i)='.';
                 i++;
             }
+            
             if((largo==6 || largo==9) && i==3){
                  *(numeroS+i)='.';
                 i++;
             }
+            
             if(largo==7 && i==5){
                 *(numeroS+i)='.';
                 i++;
             }
+            
             if(largo==8 && i==6){
                 *(numeroS+i)='.';
                 i++;
             }
+            
             if(largo==9 && i==7){
                 *(numeroS+i)='.';
                 i++;
@@ -78,9 +86,6 @@ char * formateaNumero(char *numero){
         
         }
     
-    
-printf("El numero funcion %s:",numeroS);    
-
 return numeroS;
 }
 /*
