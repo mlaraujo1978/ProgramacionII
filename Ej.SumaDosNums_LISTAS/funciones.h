@@ -1,25 +1,39 @@
+/* 
+ * File:   funciones.h
+ * Author: lourdes
+ *
+ * Created on 27 de noviembre de 2019, 20:20
+ */
+
 #ifndef FUNCIONES_H
 #define FUNCIONES_H
 
+
+
 typedef struct nodoL{
-    double num;
+    int num;
     struct nodoL *ste;
 }STR_LISTA;
 
 
-STR_LISTA *creaNodo(STR_LISTA **list, double dato);
+STR_LISTA *creaNodo(STR_LISTA **list, int dato);
 
-int MaxPosNodo (STR_LISTA *list);
+void insertAtEnd (STR_LISTA **list, int dato);
 
-void insertAtEnd (STR_LISTA **list, double dato);
+void cargaLista(STR_LISTA **list);
 
-STR_LISTA *readAt(STR_LISTA *list, double pos);
+int cuentaNodos (STR_LISTA *list);
 
-void cargaLista(STR_LISTA **list, int n, double numList[n]);
-   
-double sumaNumerosDeListas(STR_LISTA *list1, STR_LISTA *list2);
+STR_LISTA *BuscaNodoPos(STR_LISTA *list, int pos);
 
-void creaListaConSuma(double suma,STR_LISTA *list1, STR_LISTA *list2,STR_LISTA **list3);
+int sumaLista(STR_LISTA *list, int cantNodos);
+
+int sumaNumerosDeListas(STR_LISTA *list1, STR_LISTA *list2);
+
+void creaListaConSuma(int suma,STR_LISTA *list1, STR_LISTA *list2,STR_LISTA **list3);
+
+void imprimeLista(STR_LISTA *list); 
+
 
 
 #endif /* FUNCIONES_H */

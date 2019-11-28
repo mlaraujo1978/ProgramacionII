@@ -1,39 +1,27 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
 #include "funciones.h"
 
-STR_LISTA *creaNodo(STR_LISTA **list, double dato){
-
-    STR_LISTA *nodoL=(STR_LISTA*)malloc(sizeof(STR_LISTA));
-    nodoL->num=dato;
-    nodoL->ste=NULL;
+STR_LISTA *creaNodo(STR_LISTA **list, int num){
     
-    return nodoL;
+    STR_LISTA *new=(STR_LISTA*)malloc(sizeof(STR_LISTA));
+    new->num=num;
+    new->ste=NULL;
 
+return new;    
 }
 
-int MaxPosNodo (STR_LISTA *list){
+void insertAtEnd (STR_LISTA **list, int num){
 
-    STR_LISTA *listAux=list;
-    double i=1;
-    
-    while(listAux!=NULL){
-    
-    //printf("El numero es: %fd", listAux->num); 
-    listAux=listAux->ste;
-        
-    i++;
-    
-    }
-
-return i;
-}
-
-void insertAtEnd (STR_LISTA **list, double dato){
-
-    STR_LISTA *nodoL=creaNodo(list,dato);
+    STR_LISTA *nodo=creaNodo(list,num);
     
     STR_LISTA *listAux=*list;
     
@@ -44,133 +32,131 @@ void insertAtEnd (STR_LISTA **list, double dato){
 
         if(listAux==NULL){
     
-            *list=nodoL;
+            *list=nodo;
         }
     
-            else{
-                 listAux->ste=nodoL;
-                 }
-    
+        else{
+        
+            listAux->ste=nodo;
+        }
 return;
 }
 
-STR_LISTA *readAt(STR_LISTA *list, double pos){
+void cargaLista(STR_LISTA **list){
 
-    STR_LISTA *listAux=list;
-    STR_LISTA *nodoL=NULL;
-    double i=0;
+    int num;
     
-    while(i<pos && listAux!=NULL){
-        nodoL=listAux;
-        listAux=listAux->ste;
-        i++;
-    }
-  
-        if(i<pos && listAux==NULL){
+    printf("Ingrese un numero entero positivo, (-1 para termninar):\n");
+    scanf("%d", &num);
     
-            return NULL;
-        }
-
-return nodoL;
-}
-
-void cargaLista(STR_LISTA **list, int n, double numList[n]){
-
-    int dato;
-    double maxPosNodo=0;
-
-    for (double i=0; i<n;i++){
-    
-        printf("Ingrese el numero:\n");
-        scanf("%d", &dato);
-        insertAtEnd(list,dato);
-        maxPosNodo=i;
+    while (num>=0){
+       
+        insertAtEnd(list,num);
+        
+        printf("Ingrese un numero entero positivo, (-1 para termninar):\n");
+        scanf("%d", &num);
+              
     }
      
     return;
 }
-   
-double sumaNumerosDeListas(STR_LISTA *list1, STR_LISTA *list2 ){
 
-    double maxPos=0;
-    double maxPosL1=MaxPosNodo(list1);
-    double maxPosL2=MaxPosNodo(list2);
-    double suma=0;
-    double base=10;
-  
-    for(double i=1;i<=maxPosL1;i++){
-        
-        STR_LISTA *nodoL1=readAt(list1,i);
-        
-        double potencia=maxPosL1-i;
-        
-        suma+= nodoL1->num * pow(base,potencia);
-        
+int cuentaNodos (STR_LISTA *list){
+
+    STR_LISTA *listAux=list;
+    
+    int i=0;
+    
+    while(listAux!=NULL){
+    
+        i++;
+        listAux=listAux->ste;
+    
     }
-                     
-        for(double i=1;i<=maxPosL2;i++){
-        
-        STR_LISTA *nodoL2=readAt(list2,i);
-        
-        double potencia=maxPosL2-i;
-        
-        suma+= nodoL2->num * pow(base,potencia);
-        
-       }
+
+    return i;
+}
+
+
+int sumaLista(STR_LISTA *list, int cantNodos){
+
+    int suma=0;
+    int potencia=cantNodos-1;
+    int base=10;
+    STR_LISTA *listAux=list;
+    int i=0;
     
-    //printf("La suma suma es:%d", suma);   
+        while (i<cantNodos && listAux!=NULL){
     
-return suma;   
+            suma+=listAux->num * pow(base,potencia-i);
+            i++;
+        }
+
+return suma;
+}
+
+int sumaNumerosDeListas(STR_LISTA *list1, STR_LISTA *list2){
+
+    int cantNodosL1= cuentaNodos(list1);
+    int cantNodosL2= cuentaNodos(list2);
+
+    int suma1=sumaLista(list1,cantNodosL1);
+    int suma2=sumaLista(list2,cantNodosL2);
+    
+    int suma=suma1+suma2;
+    
+return suma;    
 
 }
 
-void creaListaConSuma(double suma,STR_LISTA *list1, STR_LISTA *list2,STR_LISTA **list3){
+void creaListaConSuma(int suma,STR_LISTA *list1, STR_LISTA *list2,STR_LISTA **list3){
 
-    double cociente;
-    double resto;
-    double base=10;
-    double maxPos;
-    double maxPosL1=MaxPosNodo(list1);
-    double maxPosL2=MaxPosNodo(list2);
-   
-          
-    if(maxPosL1>maxPos){
-        maxPos=maxPosL1;
-    }   
+    
+    int cantNodosL1= cuentaNodos(list1);
+    int cantNodosL2= cuentaNodos(list2);
+    int cantNodoMax=0;
+    int base=10;
+    int potencia=cantNodoMax-1;
+    int resultado=0;
+    
+    if(cantNodosL1>cantNodoMax){
+        
+    cantNodoMax=cantNodosL1;
+    
+    }
         else{
-        maxPos=maxPosL2;
+        
+        cantNodoMax=cantNodosL2;
+    
         }
-
-            for(double i=1;i<=maxPos;i++){
-                
-                double potencia=maxPos-i;
-        
-                if(i==1){
-        
-                cociente=suma/pow(base,potencia);
-                insertAtEnd(list3,cociente);
-        
-                resto= suma % pow(base,potencia);
-                
-                }
-        
-                else{
+    
+        for(int i=0;i<cantNodoMax;i++){
             
-                    if(resto>=10){
+            resultado=suma/(pow(base,potencia-i));
+            suma=suma-(pow(10,potencia-i)*resultado);
             
-                    cociente=resto/(pow(base,potencia));
-                    insertAtEnd(list3,cociente);
-        
-                    resto= resto % pow(base,(potencia));
-                
-                        if(resto<10){
-                        insertAtEnd(list3,resto);
-                        }
-                
-                    }
-                }
-            }
+            insertAtEnd(list3,resultado);
+            
+        }
+    
+    
+    return;
 
- 
+}
+
+void imprimeLista(STR_LISTA *list){
+    
+STR_LISTA *listAux=list;
+    
+    printf("\n La suma que representa la lista3 es: %d\t",listAux->num);
+    
+    while(listAux!=NULL){
+        
+        printf("El numero es: %d",listAux->num);
+            
+        listAux=listAux->ste;
+    
+    }
+
 return;
 }
