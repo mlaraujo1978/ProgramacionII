@@ -19,26 +19,13 @@ STR_LISTA *creaNodo(STR_LISTA **list, int num){
 return new;    
 }
 
-void insertAtEnd (STR_LISTA **list, int num){
+void insertInFront(STR_LISTA **list, int num){
 
     STR_LISTA *nodo=creaNodo(list,num);
     
-    STR_LISTA *listAux=*list;
-    
-    while(listAux!=NULL && listAux->ste!=NULL){
-    
-        listAux=listAux->ste;
-    }
-
-        if(listAux==NULL){
-    
-            *list=nodo;
-        }
-    
-        else{
-        
-            listAux->ste=nodo;
-        }
+    nodo->ste=*list;
+    *list=nodo;
+      
 return;
 }
 
@@ -81,14 +68,13 @@ int cuentaNodos (STR_LISTA *list){
 int sumaLista(STR_LISTA *list, int cantNodos){
 
     int suma=0;
-    int potencia=cantNodos-1;
     int base=10;
     STR_LISTA *listAux=list;
     int i=0;
     
         while (i<cantNodos && listAux!=NULL){
     
-            suma+=listAux->num * pow(base,potencia-i);
+            suma+=listAux->num * pow(base,i);
             i++;
         }
 
