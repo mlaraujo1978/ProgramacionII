@@ -38,7 +38,7 @@ void cargaLista(STR_LISTA **list){
     
     while (num>=0){
        
-        insertAtEnd(list,num);
+        insertInFront(list,num);
         
         printf("Ingrese un numero entero positivo, (-1 para termninar):\n");
         scanf("%d", &num);
@@ -121,7 +121,7 @@ void creaListaConSuma(int suma,STR_LISTA *list1, STR_LISTA *list2,STR_LISTA **li
             resultado=suma/(pow(base,potencia-i));
             suma=suma-(pow(10,potencia-i)*resultado);
             
-            insertAtEnd(list3,resultado);
+            insertInFront(list3,resultado);
             
         }
     
