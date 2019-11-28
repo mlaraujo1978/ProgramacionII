@@ -76,6 +76,7 @@ int sumaLista(STR_LISTA *list, int cantNodos){
     
             suma+=listAux->num * pow(base,i);
             i++;
+            listAux=listAux->ste;
         }
 
 return suma;
