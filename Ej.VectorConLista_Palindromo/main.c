@@ -99,26 +99,6 @@ STR_LISTA *insertAtEnd(STR_LISTA **list,char letra){
     return nodo;
 }
 
-void cargaPilaConLista(STR_VEC *vec[],int n,STR_PILA **p1,STR_PILA **p2){
-
-   
-    for(int i=0;i<n;i++){
-    
-        while(vec[i]->list!=NULL){
-        
-            push(p1,vec[i]->list->letra);
-            push(p1,vec[i]->list->letra);
-            
-        vec[i]->list=vec[i]->list->ste;
-        }
-    
-      
-    }
-
-    return;
-
-}
-
 bool validaSiPalabraEsPalindromo(STR_PILA **p1,STR_PILA **p2){
 
 STR_PILA *pAux=NULL;
@@ -157,6 +137,35 @@ STR_PILA *pAux=NULL;
 
   }
 
+void cargaPilaConLista(STR_VEC *vec[],int n,STR_PILA **p1,STR_PILA **p2){
+
+   
+    for(int i=0;i<n;i++){
+    
+        while(vec[i]->list!=NULL){
+        
+            push(p1,vec[i]->list->letra);
+            push(p2,vec[i]->list->letra);
+            
+        vec[i]->list=vec[i]->list->ste;
+        }
+        
+    if(validaSiPalabraEsPalindromo(p1,p2)){
+               printf("La palabra es palindromo");
+    }
+    
+        else{
+               printf("La palabra no es palindromo");
+        }
+            
+      
+    }
+
+    return;
+
+}
+
+
 /*
  * 
  */
@@ -189,42 +198,33 @@ int main(int argc, char** argv) {
     
     while(fgets(linea,20+1,fP)!=NULL){
         
-       
-       memset(palabra,'\0',20);
+        memset(palabra,'\0',20);
         
-                        
+                  
         while(*linea && *linea!='.'){
                 
-                *(palabra+i)=*linea;
+               *(palabra+i)=*linea;
                 
-               insertAtEnd(vec[k]->list,*linea);
+               insertAtEnd(&vec[k]->list,*linea);
                 
                linea++;
                 i++;
                 j++;
         }
-        printf("PALABRA %s",palabra);
+        printf("PALABRA: %s\t",palabra);
         i=0;
         linea++;
         j++;
         linea=linea-j;
         j=0;
-        k++;            
-       
+        k++;   
     }
- 
+    
     fclose(fP);
 
     cargaPilaConLista(vec,5,&p1,&p2);
     
-    if(validaSiPalabraEsPalindromo(&p1,&p2)){
-               printf("La palabra es palindromo");
-    }
     
-        else{
-               printf("La palabra no es palindromo");
-        }
-            
     return (EXIT_SUCCESS);
 }
 
