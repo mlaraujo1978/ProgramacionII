@@ -78,7 +78,6 @@ return p==NULL;
 
 STR_LISTA *insertAtEnd(STR_LISTA **list,char letra){
     
-    
     STR_LISTA *nodo =(STR_LISTA*)malloc(sizeof(STR_LISTA));
     nodo->letra = letra;
     nodo->ste = NULL;
@@ -97,22 +96,20 @@ STR_LISTA *insertAtEnd(STR_LISTA **list,char letra){
         
         listAux->ste = nodo;
         }
-    
     return nodo;
 }
 
 void cargaPilaConLista(STR_VEC *vec[],int n,STR_PILA **p1,STR_PILA **p2){
 
-    STR_LISTA *listAux=vec;
-    
+   
     for(int i=0;i<n;i++){
     
-        while(listAux!=NULL){
+        while(vec[i]->list!=NULL){
         
             push(p1,vec[i]->list->letra);
             push(p1,vec[i]->list->letra);
             
-        listAux=listAux->ste;
+        vec[i]->list=vec[i]->list->ste;
         }
     
       
